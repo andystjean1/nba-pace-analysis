@@ -10,7 +10,6 @@ from nba_api.stats.static import teams
 def get_team_pace(team_abv, season):
 
     url ="https://www.basketball-reference.com/teams/{}/{}.html"
-
     url = url.format(team_abv, season)
 
     resp = requests.get(url)
@@ -37,7 +36,6 @@ def build_pace_dictionary(season):
         try:
             abv = team["abbreviation"]
             #print(abv)
-
             #make sure the abbreviation will match basketball-reference
             if(abv == "BKN"):
                 pace = get_team_pace("BRK", season) #Nets
@@ -54,5 +52,29 @@ def build_pace_dictionary(season):
 
     return team_pace
 
+# build the abbreviation and id dictionary
+# parameter - season
+# returns a dictionary containing the team abbreviation and the id
+# dictionary: key = abbreviation - value = ID
+def build_team_id_dictionary(season):
+    team_list = teams.get_teams()
+    team_id = {}
+
+    for team in team_list:
+        abv = team["abbreviation"]
+
+        if(abv == "BKN"):
+            abv  = "BRK" #Nets
+        elif(abv == "PHX"):
+            abv  = "PHO" #Nets
+        elif(abv == "CHA"):
+            abv  = "CHO" #Nets
+        else:
+            pass
+
+        team_id[abv] = team["id"]
+
+    return team_id
+
 if __name__ == "__main__":
-    print(build_pace_dictionary('2019'))
+    print(build_team_id_dictionary('2019'))
