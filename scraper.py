@@ -74,7 +74,7 @@ def convert_gamelog_to_dataframe(abv, season):
         game_dict = create_game_dict(g)
         game_frame = game_frame.append(game_dict, ignore_index=True)
 
-    game_frame.insert(1, "id", 'BOS')
+    game_frame.insert(1, "id", abv)
     
     return game_frame
 
