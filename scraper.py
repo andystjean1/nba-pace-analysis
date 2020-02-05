@@ -23,7 +23,6 @@ def create_game_dict(game_row):
 
     #put the game into a dictionary
     for td in game_row.find_all('td'):
-
         #want to skip the row with x
         if(td['data-stat'] != 'x'):
             key = td["data-stat"]
@@ -75,7 +74,7 @@ def convert_gamelog_to_dataframe(abv, season):
         game_frame = game_frame.append(game_dict, ignore_index=True)
 
     game_frame.insert(1, "id", abv)
-    
+
     return game_frame
 
 
